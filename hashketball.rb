@@ -25,16 +25,22 @@ def game_hash
   }
   end 
   # Write your code here!
-  
-
-def num_points_scored(player)
-  game_hash.each do |team, details|
-    my_var = details[:players][player]
-    if my_var
-      return my_var[:points]
+  def num_points_scored(player)
+    game_hash.each do |team, details| 
+      my var = details[:players].fetch?(player)
+      binding.pry
     end
   end
-end
+    
+
+# def num_points_scored(player)
+#   game_hash.each do |team, details|
+#     my_var = details[:players][player]
+#     if my_var
+#       return my_var[:points]
+#     end
+#   end
+# end
 
 def shoe_size(player)
   game_hash.each do |team, details|
@@ -83,16 +89,17 @@ def player_stats(player)
 end
 
 def big_shoe_rebounds
-  numbers_arr = []
+  player_with_biggest_shoe_size = nil
+  
   game_hash.each do |team, details|
-      details[:players].each do |player, stats|
-         my_thing = 0
-      if stats[:shoe_size] = my_thing
-        stats[:shoe_size] = my_thing
-        return stats[:rebounds]
+    details[:players].each do |player, stats|
+      player_with_biggest_shoe_size = stats if player_with_biggest_shoe_size.nil?
+      if player_with_biggest_shoe_size[:shoe] < stats[:shoe]
+        player_with_biggest_shoe_size = stats
+      end
     end
-end
-end
+  end
+  player_with_biggest_shoe_size[:rebounds]
 end
         # numbers_arr << stats[:shoe_size]
         # my_arr = numbers_arr.sort
